@@ -1,5 +1,4 @@
 #include <applib>
-#include <iostream>
 
 using namespace std;
 

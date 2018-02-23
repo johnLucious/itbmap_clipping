@@ -1,2 +1,6 @@
-//Header Lists
-#include<const/app.h>
+#ifndef _APPLIB_
+#define _APPLIB_
+#include <headers/consts.h>
+#include <headers/includes.h>
+#include <models/asd.h>
+#endif
