@@ -12,8 +12,11 @@ class Renderable {
 		int color_b;
 
 	public:
-		std::vector<Point> getPoints();
-		static std::vector<Renderable> parseFile(std::string filename);
+		std::vector<Point>& getPoints();
+        void setPoints(std::vector<Point>& _points){
+            points = _points;
+    }
+		static std::vector<Renderable *> parseFile(std::string filename);
 		/*
 		 * Generate borders in pixels
 		 */

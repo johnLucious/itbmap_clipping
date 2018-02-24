@@ -3,3 +3,4 @@ bin/
 .idea/
 main
 cmake-build-debug/
+*.log

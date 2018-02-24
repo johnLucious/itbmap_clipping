@@ -39,4 +39,4 @@ clean:
 
 run: exec
 exec:
-	sudo ./main
+	sudo ./main 2> main.log

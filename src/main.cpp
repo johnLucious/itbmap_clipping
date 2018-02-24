@@ -3,5 +3,7 @@
 using namespace std;
 
 int main() {
-	Renderable::parseFile("res/bangunanitb.txt");
+	vector<Renderable *> bangunan = Renderable::parseFile("res/bangunanitb.txt");
+    vector<Renderable *> jalan = Renderable::parseFile("res/jalanitb.txt");
+
 }
