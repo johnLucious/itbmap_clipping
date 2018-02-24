@@ -13,6 +13,7 @@ class Driver {
 
 		Driver();
 		void init();
+		void initCaptureKeyboard();
 };
 
 #endif
