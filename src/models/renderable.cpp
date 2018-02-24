@@ -29,6 +29,7 @@ vector<Renderable *> Renderable::parseFile(string filename) {
             buffer->getPoints().push_back(pBuff);
         }
         result.push_back(buffer);
+        buffer->createBorder();
     }
     return result;
 }
@@ -40,15 +41,16 @@ void Renderable::createBorder(){
 	int dx,dy;
 	int derr,err;
 	int x,y;
+    fprintf(stderr,"Points size: %d\n", points.size());
 	for (int i = 0; i < points.size(); i++)
 	{
 		Point t1 = points[i];
-		Point t2 = points[i+1% points.size()];
+		Point t2 = points[(i+1) % points.size()];
 		x1 = t1.getX();
 		x2 = t2.getX();
 		y1 = t1.getY();
 		y2 = t2.getY();
-
+        fprintf(stderr, "Creating line from %d %d to %d %d\n",x1,y1,x2,y2);
 		//cout << *itr << endl;
 		steep = 0;
 		if(abs(x1-x2) < abs(y1-y2)){
@@ -68,10 +70,12 @@ void Renderable::createBorder(){
 	    for(x = x1; x <= x2; x++){
 	        if(steep){
 	            //printPixel(y,x,colorR,colorG,colorB);
+                fprintf(stderr, "Adding pixel %d %d to pixels\n", y,x);
 	            pixels[y][x] = true;
 	        }else{
 	            //printPixel(x,y,colorR,colorG,colorB);
-	            pixels[x][y] = true;
+                fprintf(stderr, "Adding pixel %d %d to pixels\n", x,y);
+                pixels[x][y] = true;
 	        }
 	        err+=derr;
 	        if(err > dx){
@@ -81,6 +85,11 @@ void Renderable::createBorder(){
 	    }
 	}
 }
+
+const std::unordered_map<int, std::unordered_map<int, bool> >& Renderable::getPixels() {
+    return pixels;
+};
+
 
 /*void drawLine(point p1, point p2, int thickness, int colorR, int colorG, int colorB){//Bresenham
     int x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y;

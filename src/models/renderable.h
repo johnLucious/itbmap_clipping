@@ -15,8 +15,9 @@ class Renderable {
 		std::vector<Point>& getPoints();
         void setPoints(std::vector<Point>& _points){
             points = _points;
-    }
-		static std::vector<Renderable *> parseFile(std::string filename);
+        }
+        const std::unordered_map<int, std::unordered_map<int, bool> >& getPixels();
+        static std::vector<Renderable *> parseFile(std::string filename);
 		/*
 		 * Generate borders in pixels
 		 */
