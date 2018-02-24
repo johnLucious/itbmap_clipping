@@ -38,35 +38,35 @@ bool ViewportDriver::isPointInViewPort(int x, int y) {
 }
 
 void ViewportDriver::renderCanvas() {
-	for(Renderable* i: canvas->getRenderables()) {
-		int r = i->getRed();
-		int b = i->getBlue();
-		int g = i->getGreen();
-		for(auto j : i->getPixels()) {
-			for(auto k : j.second) {
-				int x = j.first;
-				int y = k.first;
-				fprintf(stderr, "GetPixel in %d %d\n", x,y);
-					if(isPointInViewPort(j.first, k.first) && k.second) {
-						fb_driver.printPixel(x,y,r,g,b);
-					}
-			}
-		}
-	}
-	// for(int r = VIEWPORT_START_Y; r < VIEWPORT_HEIGHT+VIEWPORT_START_Y; r++) {
-	// 	for(int c = VIEWPORT_START_X; c < VIEWPORT_WIDTH+VIEWPORT_START_X;c++) {
-	// 		for(Renderable* i: canvas->getRenderables()) {
-	// 			int re = i->getRed();
-	// 			int b = i->getBlue();
-	// 			int g = i->getGreen();
-	// 			bool f = i->getPixels()[r][c];
-	// 			if(f) {
-	// 				fb_driver.printPixel(r,c,re,g,b);
-
-	// 			}
+	// for(Renderable* i: canvas->getRenderables()) {
+	// 	int r = i->getRed();
+	// 	int b = i->getBlue();
+	// 	int g = i->getGreen();
+	// 	for(auto j : i->getPixels()) {
+	// 		for(auto k : j.second) {
+	// 			int x = j.first;
+	// 			int y = k.first;
+	// 			fprintf(stderr, "GetPixel in %d %d\n", x,y);
+	// 				if(isPointInViewPort(j.first, k.first) && k.second) {
+	// 					fb_driver.printPixel(x,y,r,g,b);
+	// 				}
 	// 		}
 	// 	}
 	// }
+	for(int r = VIEWPORT_START_Y; r < VIEWPORT_HEIGHT+VIEWPORT_START_Y; r++) {
+			for(int c = VIEWPORT_START_X; c < VIEWPORT_WIDTH+VIEWPORT_START_X;c++) {
+			for(Renderable* i: canvas->getRenderables()) {
+				int re = i->getRed();
+				int b = i->getBlue();
+				int g = i->getGreen();
+				bool f = i->getPixels()[r][c];
+				if(f) {
+					fb_driver.printPixel(r,c,re,g,b);
+
+				}
+			}
+		}
+	}
 	// for(Renderable* i: canvas->getRenderables()) {
 	// 	int r = i->getRed();
 	// 	int b = i->getBlue();
