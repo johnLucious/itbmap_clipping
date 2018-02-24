@@ -13,4 +13,5 @@
 #include <ncurses.h>
 #include <iostream>
 #include <vector>
+#include <bits/stdc++.h>
 #endif

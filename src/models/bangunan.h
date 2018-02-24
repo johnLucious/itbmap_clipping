@@ -6,7 +6,7 @@
 class Bangunan : public Renderable {
 
 	public:
-		std::vector<Bangunan> parseFile(std::string filename);
+
 };
 
 #endif
