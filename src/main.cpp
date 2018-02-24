@@ -5,20 +5,20 @@ using namespace std;
 void initCaptureKeyboard();
 void garbageCaptureKeyboard();
 void startKeystrokeThread();
-ViewportDriver vDriver(0,0,canvas);
+ViewportDriver *vDriver;
 Point p(2,5);
 const struct timespec* delay = (const struct timespec[]){{0,2*16666667L}};
 
 int main() {
-    vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt");
-    vector<Renderable * > jalan = Renderable::parseFile("res/jalanitb.txt");
+
+
 
     vector<Renderable * > bangunan = Renderable::parseFile("res/bangunanitb.txt", 1,20,20,255);
     vector<Renderable * > jalan = Renderable::parseFile("res/jalan2.txt", 1.37, 20,20,20);
     jalan.insert(jalan.end(),bangunan.begin(), bangunan.end());
 
     Canvas* canvas = new Canvas(jalan);
-
+	vDriver = new ViewportDriver(0,0,canvas);
     startKeystrokeThread();
 
     while(1){
@@ -103,20 +103,26 @@ void initCaptureKeyboard() {
                     case 103:
                         // Up arrow trigger
                         //P1.setY(P1.getY() - 1);
-                        vDriver
+                        vDriver->moveUp();
                         break;
                     case 105:
                         // Left arrow trigger
                         //P1.setX(P1.getX() - 1);
+			//cout << "leftarrow" << endl;
+			vDriver->moveLeft();
+				
                         break;
 
                     case 106:
                         // Right arrow trigger
                         //P1.setX(P1.getX() + 1);
+			vDriver->moveRight();
+			//cout << "right" << endl;
                         break;
                     case 108:
                         // Down arrow trigger
                         //P1.setY(P1.getY() + 1);
+			vDriver->moveDown();
                         break;
 
                     default:
