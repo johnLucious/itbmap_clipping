@@ -10,6 +10,8 @@ class Line {
 		Line();
 		Line(Point begin, Point end);
 		Line(const Line&);
+		Point getBeginPoint(Line line);
+		Point getEndPoint(Line line);
 };
 
 #endif
