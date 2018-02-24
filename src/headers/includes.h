@@ -1,5 +1,3 @@
-#ifndef _INCLUDES_
-#define _INCLUDES_
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,4 +12,6 @@
 #include <iostream>
 #include <vector>
 #include <bits/stdc++.h>
-#endif
+#include <linux/input.h>
+#include <pthread.h>
+#include <thread>

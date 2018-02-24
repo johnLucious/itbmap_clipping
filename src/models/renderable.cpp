@@ -30,6 +30,7 @@ vector<Renderable *> Renderable::parseFile(string filename) {
         }
         result.push_back(buffer);
         buffer->createBorder();
+        buffer->rasterColor();
     }
     return result;
 }
@@ -138,7 +139,7 @@ void Renderable::rasterColor(){
                         for(int jt = arr[startPoint]; jt < arr[endPoint];jt++){
                             int x = xmin + jt;
                             pixels[x][y] = true;
-                            cout << "Isi: "<< x << " " << y << ":" << pixels[x][y] << endl;
+                            //cout << "Isi: "<< x << " " << y << ":" << pixels[x][y] << endl;
                         }
                     }
                 }
@@ -150,5 +151,3 @@ void Renderable::rasterColor(){
 const std::unordered_map<int, std::unordered_map<int, bool> >& Renderable::getPixels() {
     return pixels;
 };
-
-
