@@ -17,15 +17,18 @@ OBJ_FILES := $(addprefix $(OBJ)/,$(patsubst %.cpp,%.o,$(SRC_FILES)))
 
 CC:= g++
 CC_FLAG= -Wall -I $(SRC) -std=c++11 
+all: generate | $(EXEC) 
 
-$(EXEC):$(OBJ_FILES)
+generate:
+	@cd src && (sh .gen.sh > applib)
+$(EXEC):$(OBJ_FILES) 
 	@$(CC) $^ -o $@ 
 	@echo "Linking: $@"
 $(OBJ_FOLDERS):
 	@echo "Make Directory : $@"
 	@mkdir -p $@
 
-$(OBJ)/%.o: %.cpp $(SRC_HEADERS) | $(OBJ_FOLDERS)
+$(OBJ)/%.o: %.cpp $(SRC_HEADERS) | $(OBJ_FOLDERS) 
 	@$(CC) $(CC_FLAG) -c  $<  -o $@ 
 	@echo "Compiling: $<"
 clean:
