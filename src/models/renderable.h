@@ -7,17 +7,17 @@ class Renderable {
 	private:
 		std::vector<Point> points;
 		std::unordered_map<int, std::unordered_map<int, bool> > pixels;
-		int color_r;
-		int color_g;
-		int color_b;
+		int red;
+		int green;
+		int blue;
 
 	public:
 		std::vector<Point>& getPoints();
         void setPoints(std::vector<Point>& _points){
             points = _points;
         }
-        const std::unordered_map<int, std::unordered_map<int, bool> >& getPixels();
-        static std::vector<Renderable *> parseFile(std::string filename);
+        std::unordered_map<int, std::unordered_map<int, bool> >& getPixels();
+        static std::vector<Renderable *> parseFile(std::string filename,double, int, int, int);
 		/*
 		 * Generate borders in pixels
 		 */
@@ -26,6 +26,12 @@ class Renderable {
 		 * Rastering color in pixels
 		 */
 		void rasterColor();
+
+		void setColor(int r,int g, int b);
+
+		int getRed();
+		int getBlue();
+		int getGreen();
 };
 
 #endif

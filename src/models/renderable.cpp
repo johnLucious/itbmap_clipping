@@ -9,7 +9,7 @@ vector<Point>& Renderable::getPoints() {
 }
 
 
-vector<Renderable *> Renderable::parseFile(string filename) {
+vector<Renderable *> Renderable::parseFile(string filename, double scale, int red, int green, int blue) {
     vector<Renderable *> result;
     FILE * pFile;
     pFile = fopen(filename.c_str(),"r");
@@ -25,14 +25,34 @@ vector<Renderable *> Renderable::parseFile(string filename) {
 
             fscanf(pFile, "%d %d\n", &x, &y);
             fprintf(stderr,"Reading point: %d %d\n",x ,y);
-            Point pBuff(x,y);
+            Point pBuff(x * scale,y * scale);
+            fprintf(stderr, "Add point : %d %d", pBuff.getX(), pBuff.getY());
             buffer->getPoints().push_back(pBuff);
         }
         result.push_back(buffer);
+        buffer->setColor(red, green, blue);
         buffer->createBorder();
+        buffer->rasterColor();
     }
     return result;
 }
+	
+void Renderable::setColor(int r, int g, int b){
+	red = r;
+	green = g;
+	blue = b;
+}
+
+int Renderable::getRed() {
+	return red;
+}
+int Renderable::getBlue() {
+	return blue;
+}
+int Renderable::getGreen() {
+	return green;
+}
+
 
 void Renderable::createBorder(){
 	vector<int>::iterator itr;
@@ -93,8 +113,8 @@ void Renderable::rasterColor(){
         xmin = (points[i].getX() < xmin)? points[i].getX():xmin;
         ymin = (points[i].getY() < ymin)? points[i].getY():ymin;
     }    
-    cout << xmin << " " << ymin << endl;
-    cout << xmax << " " << ymax << endl;
+    // cout << xmin << " " << ymin << endl;
+    // cout << xmax << " " << ymax << endl;
     unsigned char onFlag = 0;
     unsigned char started = 0;
     for(int i = 0; i < ymax-ymin+1; i++) {
@@ -120,7 +140,7 @@ void Renderable::rasterColor(){
         if(nPoint % 2 != 0) {
             median = nPoint / 2;
         }
-        cout << nPoint << endl;
+        // cout << nPoint << endl;
         //printf("median: %d\n", median);
         //printf("Start Printing::\n");
         if(nPoint > 1 && i!=0 && i!=(xmax-xmin+1)) {
@@ -138,7 +158,7 @@ void Renderable::rasterColor(){
                         for(int jt = arr[startPoint]; jt < arr[endPoint];jt++){
                             int x = xmin + jt;
                             pixels[x][y] = true;
-                            cout << "Isi: "<< x << " " << y << ":" << pixels[x][y] << endl;
+                            fprintf(stderr, "Filling point %d %d\n", x, y);
                         }
                     }
                 }
@@ -147,7 +167,7 @@ void Renderable::rasterColor(){
     }
 }
 
-const std::unordered_map<int, std::unordered_map<int, bool> >& Renderable::getPixels() {
+std::unordered_map<int, std::unordered_map<int, bool> >& Renderable::getPixels() {
     return pixels;
 };
 

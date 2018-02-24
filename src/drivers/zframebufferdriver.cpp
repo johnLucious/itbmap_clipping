@@ -1,12 +1,11 @@
-#include "framebufferdriver.h"
-
-Driver::Driver() {
+#include<applib>
+FramebufferDriver::FramebufferDriver() {
 	fbfd = 0;
 	screensize = 0;
 	location = 0;
 }
 
-void Driver::init() {
+void FramebufferDriver::init() {
 	fbfd = open("/dev/fb0", O_RDWR);
     if (fbfd == -1) {
         perror("Error: cannot open framebuffer device");
@@ -38,4 +37,24 @@ void Driver::init() {
         exit(4);
     }
     printf("The framebuffer device was mapped to memory successfully.\n");
+}
+
+void FramebufferDriver::clearScreen() {
+     for (int x = VIEWPORT_START_X; x < VIEWPORT_WIDTH + VIEWPORT_START_X; x++){
+        for (int y = VIEWPORT_START_Y; y < VIEWPORT_HEIGHT + VIEWPORT_START_Y; y++) {
+            printPixel(x,y,255,255,255);
+        }
+    }
+}
+
+void FramebufferDriver::printPixel(int x, int y, int colorR, int colorG, int colorB){  //Print Pixel Color using RGB
+    location = (x+vinfo.xoffset) * (vinfo.bits_per_pixel/8) +
+                       (y+vinfo.yoffset) * finfo.line_length;
+
+    if (vinfo.bits_per_pixel == 32) {
+        *(fbp + location)     = colorB;     //Blue Color
+        *(fbp + location + 1) = colorG;     //Green Color
+        *(fbp + location + 2) = colorR;     //Red Color
+        *(fbp + location + 3) = 0;          //Transparancy
+    }
 }

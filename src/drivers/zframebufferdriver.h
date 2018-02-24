@@ -2,7 +2,7 @@
 #define _FBDRIVER_
 #include <applib>
 
-class Driver {
+class FramebufferDriver {
 	public:
 		struct fb_var_screeninfo vinfo;
 		struct fb_fix_screeninfo finfo;
@@ -11,8 +11,12 @@ class Driver {
 		long int screensize;
 		long int location;
 
-		Driver();
+		FramebufferDriver();
 		void init();
+		void printPixel(int x, int y, int colorR, int colorG, int colorB);
+		void clearScreen();
 };
+
+
 
 #endif
