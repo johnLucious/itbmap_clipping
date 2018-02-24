@@ -4,6 +4,8 @@
 /* Clip objects into moving viewport			*/
 /************************************************/
 
+#include <applib>
+
 #define HEIGHT 500
 #define WIDTH 800
 #define INIT_HEIGHT 100
