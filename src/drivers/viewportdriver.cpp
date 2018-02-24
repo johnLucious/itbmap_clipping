@@ -46,7 +46,7 @@ void ViewportDriver::renderCanvas() {
 			for(auto k : j.second) {
 				int x = j.first;
 				int y = k.first;
-				fprintf(stderr, "GetPixel in %d %d\n", x,y);
+				//~ fprintf(stderr, "GetPixel in %d %d\n", x,y);
 					if(isPointInViewPort(j.first, k.first) && k.second) {
 						fb_driver.printPixel(x,y,r,g,b);
 					}

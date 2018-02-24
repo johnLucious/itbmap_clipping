@@ -13,20 +13,20 @@ vector<Renderable *> Renderable::parseFile(string filename, double scale, int re
     vector<Renderable *> result;
     FILE * pFile;
     pFile = fopen(filename.c_str(),"r");
-    fprintf(stderr,"Reading new File: %s\n", filename.c_str());
+    //~ fprintf(stderr,"Reading new File: %s\n", filename.c_str());
     int q;
     while(fscanf(pFile, "%d", &q) && q!= -999) {
 
         int x, y;
 
-        fprintf(stderr,"Reading shape with %d point\n", q);
+        //~ fprintf(stderr,"Reading shape with %d point\n", q);
         Renderable *buffer = new Renderable();
         while(q--) {
 
             fscanf(pFile, "%d %d\n", &x, &y);
-            fprintf(stderr,"Reading point: %d %d\n",x ,y);
+            //~ fprintf(stderr,"Reading point: %d %d\n",x ,y);
             Point pBuff(x * scale,y * scale);
-            fprintf(stderr, "Add point : %d %d", pBuff.getX(), pBuff.getY());
+            //~ fprintf(stderr, "Add point : %d %d", pBuff.getX(), pBuff.getY());
             buffer->getPoints().push_back(pBuff);
         }
         result.push_back(buffer);
@@ -61,7 +61,7 @@ void Renderable::createBorder(){
 	int dx,dy;
 	int derr,err;
 	int x,y;
-    fprintf(stderr,"Points size: %d\n", points.size());
+    //~ fprintf(stderr,"Points size: %d\n", points.size());
 	for (int i = 0; i < points.size(); i++)
 	{
 		Point t1 = points[i];
@@ -70,7 +70,7 @@ void Renderable::createBorder(){
 		x2 = t2.getX();
 		y1 = t1.getY();
 		y2 = t2.getY();
-        fprintf(stderr, "Creating line from %d %d to %d %d\n",x1,y1,x2,y2);
+        //~ fprintf(stderr, "Creating line from %d %d to %d %d\n",x1,y1,x2,y2);
 		//cout << *itr << endl;
 		steep = 0;
 		if(abs(x1-x2) < abs(y1-y2)){
@@ -158,7 +158,7 @@ void Renderable::rasterColor(){
                         for(int jt = arr[startPoint]; jt < arr[endPoint];jt++){
                             int x = xmin + jt;
                             pixels[x][y] = true;
-                            fprintf(stderr, "Filling point %d %d\n", x, y);
+                            //~ fprintf(stderr, "Filling point %d %d\n", x, y);
                         }
                     }
                 }
