@@ -6,5 +6,6 @@
 #include <models/jalan.h>
 #include <models/pohon.h>
 #include <models/renderable.h>
+#include <utils/circle.h>
 #include <utils/line.h>
 #include <utils/point.h>
