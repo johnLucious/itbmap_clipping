@@ -4,16 +4,7 @@
 /* Clip objects into moving viewport			*/
 /************************************************/
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <linux/fb.h>
-#include <sys/mman.h>
-#include <sys/ioctl.h>
-#include <string.h>
-#include <math.h>
-#include <ncurses.h>
+#include <applib>
 
 #define HEIGHT 500
 #define WIDTH 800
